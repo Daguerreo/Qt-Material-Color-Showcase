@@ -304,11 +304,6 @@ ApplicationWindow {
         }
 
     }
-
-
-    function lighter(color, shade){
-
-    }
 }
 
 
