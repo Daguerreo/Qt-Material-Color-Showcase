@@ -1,7 +1,7 @@
 # Qt-Material-Color-Showcase
 Showcase for Qt material color palette
 
-![](images/light.png)
+![](images/light2.png)
 
 ![](images/dark.png)
 

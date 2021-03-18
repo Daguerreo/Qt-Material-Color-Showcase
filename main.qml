@@ -7,8 +7,8 @@ import QtQuick.Controls.Material 2.12
 ApplicationWindow {
     id: root
     visible: true
-    width: 814
-    height: 809
+    width: 584
+    height: 846
 
     property var selectedSquare
     property var selectedColor: Material.Red
@@ -158,7 +158,7 @@ ApplicationWindow {
                                     radius: root.radius
                                     color: Material.color(modelData, shades[columnIndex])
                                     border.width: 0
-                                    border.color: root.Material.theme == Material.Light ? "black" : "white"
+                                    border.color: root.Material.theme === Material.Light ? "black" : "white"
                                     Layout.fillWidth: true
                                     Layout.fillHeight: true
 
@@ -189,21 +189,30 @@ ApplicationWindow {
                     Layout.fillWidth: true
                     clip: true
                     RowLayout {
-                        Rectangle {
-                            width: 64
-                            height: 64
-                            color: Material.color(selectedColor, selectedShade)
-                        }
-
                         GridLayout {
                             Layout.fillWidth: false
                             Layout.fillHeight: false
                             columns: 2
+
+                            Label {
+                                text: checkTheme.checked ? "Dark" : "Light"
+                                Layout.fillWidth: true
+                            }
+                            CheckBox {
+                                id: checkTheme
+                                Layout.fillWidth: false
+                                onCheckedChanged: {
+                                    if(checked) root.Material.theme = Material.Dark
+                                    else root.Material.theme = Material.Light
+                                }
+                            }
+
                             Label { text: "Color"; Layout.fillWidth: true }
                             Label { text: selectedName; Layout.fillWidth: true }
                             Label { text: "RGB"; Layout.fillWidth: true }
                             TextField {
                                 text: Material.color(selectedColor, selectedShade)
+                                Layout.fillWidth: false
                                 readOnly: true
                                 selectByMouse: true
                             }
@@ -288,13 +297,6 @@ ApplicationWindow {
                             }
                         }
 
-                        SwitchDelegate {
-                            text: checked ? "Dark Mode" : "Light Mode"
-                            onCheckedChanged: {
-                                if(checked) root.Material.theme = Material.Dark
-                                else root.Material.theme = Material.Light
-                            }
-                        }
                     }
                 }
 
